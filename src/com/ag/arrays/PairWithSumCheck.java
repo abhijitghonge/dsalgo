@@ -1,4 +1,4 @@
-package com.ag;
+package com.ag.arrays;
 
 import java.util.HashSet;
 import java.util.Set;
