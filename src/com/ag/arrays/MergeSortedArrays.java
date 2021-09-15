@@ -8,9 +8,6 @@ public class MergeSortedArrays {
         int[] array1 = {0,3,4};
         int[] array2 = {4,6,30};
 
-//        int[] array1 = {};
-//        int[] array2 = {};
-
         int[] result = mergeSortedArrays(array1,array2 );
         Arrays.stream(result).forEach(System.out::println);
 
