@@ -1,9 +1,7 @@
 package com.ag.sorting;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class InsertionSet {
     public static void main(String[] args) {

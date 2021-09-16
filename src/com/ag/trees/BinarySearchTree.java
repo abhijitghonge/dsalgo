@@ -1,69 +1,110 @@
 package com.ag.trees;
 
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import javafx.util.Pair;
+
+import java.util.LinkedList;
+import java.util.Queue;
 
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 public class BinarySearchTree {
+
+
     private Node<Integer> root = null;
 
 
     public static void main(String[] args) {
-        BinarySearchTree tree= new BinarySearchTree();
+        BinarySearchTree tree = new BinarySearchTree();
 
-        tree.insert(101);
-        tree.insert(33);
-        tree.insert(56);
-        tree.insert(105);
-        tree.insert(104);
+        tree.insert(9);
+        tree.insert(4);
+        tree.insert(6);
+        tree.insert(20);
+        tree.insert(170);
+        tree.insert(15);
+        tree.insert(1);
 
         tree.traverse(new PrintVisitor<Integer>(), tree.root);
         System.out.println(tree.lookup(56));
         System.out.println(tree.lookup(59));
+        System.out.println(tree.validate());
     }
 
-    public boolean insert(Integer value){
+    public Node<Integer> getRoot() {
+        return root;
+    }
+
+    public boolean insert(Integer value) {
         Node<Integer> newNode = new Node<>(value);
-        if(isNull(root)){
+        if (isNull(root)) {
             root = newNode;
             return true;
         }
         Node<Integer> current = root;
         Pair<Node<Integer>, Boolean> result = innerLookup(current, value);
-        if(Boolean.TRUE == result.getValue()) return true;
+        if (Boolean.TRUE == result.getValue()) return true;
         current = result.getKey();
 
-        if(newNode.value > current.value){
+        if (newNode.value > current.value) {
             current.right = newNode;
-        }else if(newNode.value < current.value){
+        } else if (newNode.value < current.value) {
             current.left = newNode;
-        }else{
+        } else {
             return true;
         }
 
         return false;
     }
 
+    public boolean validate(){
+        if(isNull(root)) return true;
+
+        Queue<Node<Integer>> workQueue = new LinkedList<>();
+        workQueue.offer(root);
+        while(!workQueue.isEmpty()){
+            Node<Integer> current = workQueue.poll();
+            if(nonNull(current.getLeft()) ){
+                if(current.value < current.getLeft().value) {
+                    return false;
+                }else{
+                    workQueue.offer(current.getLeft());
+                }
+            }
+
+            if(nonNull(current.getRight()) ){
+                if(current.value > current.getRight().value) {
+                    return false;
+                }else{
+                    workQueue.offer(current.getRight());
+                }
+            }
+
+        }
+
+        return true;
+    }
+
+
+
 
     private boolean isLeaf(Node<Integer> current) {
         return isNull(current.left) && isNull(current.right);
     }
 
-    private Pair<Node<Integer>, Boolean> innerLookup(Node<Integer> current, Integer value){
-        if(isNull(root)){
+    private Pair<Node<Integer>, Boolean> innerLookup(Node<Integer> current, Integer value) {
+        if (isNull(root)) {
             return new Pair<>(null, false);
         }
-        while(!isLeaf(current) ){
-            if(value > current.value && nonNull(current.right)){
+        while (!isLeaf(current)) {
+            if (value > current.value && nonNull(current.right)) {
                 //traverse right
                 current = current.right;
-            }else if(value < current.value && nonNull(current.left)){
+            } else if (value < current.value && nonNull(current.left)) {
                 //traverse right
                 current = current.left;
-            }else{
+            } else {
                 return new Pair<>(current, (value == current.value));
             }
         }
@@ -71,34 +112,35 @@ public class BinarySearchTree {
         return new Pair<>(current, (value == current.value));
     }
 
-    public boolean lookup(Integer value){
+    public boolean lookup(Integer value) {
 
         return innerLookup(root, value).getValue();
     }
 
     //Inorder
-   public void traverse(Visitor<Node<Integer>> visitor, Node<Integer> current){
+    public void traverse(Visitor<Node<Integer>> visitor, Node<Integer> current) {
 
-        if(current == null) {
+        if (current == null) {
             current = this.root;
         }
+
         //traverse left node
-        if(nonNull(current.left)){
-            traverse(visitor,current.left);
+        if (nonNull(current.left)) {
+            traverse(visitor, current.left);
         }
-       //traverse right node
-       if(nonNull(current.right)){
-           traverse(visitor,current.right);
-       }
+        //Visit current node
+        visitor.visit(current);
+        //traverse right node
+        if (nonNull(current.right)) {
+            traverse(visitor, current.right);
+        }
 
-       //Visit current node
-       visitor.visit(current);
 
-   }
+    }
 
 
     public static class Node<T> {
-        private T value;
+        private final T value;
         private Node<T> left;
         private Node<T> right;
         private Node<T> parent;
@@ -112,6 +154,22 @@ public class BinarySearchTree {
 
         public T getValue() {
             return value;
+        }
+
+        public Node<T> getLeft() {
+            return left;
+        }
+
+        public Node<T> getRight() {
+            return right;
+        }
+
+        public boolean isLeaf(){
+            return isNull(this.left) && isNull(this.right);
+        }
+
+        public boolean isNotLeaf(){
+            return !isNull(this.left) || !isNull(this.right);
         }
 
     }
