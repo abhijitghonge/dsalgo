@@ -6,8 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 public class Graph {
+
+
     private int numberOfNodes = 0;
-    private final Map<Integer, List<Integer>> adjacencyList= new HashMap();
+    private final Map<Integer, List<Integer>> adjacencyList= new HashMap<>();
 
     private void addVertex (int node){
         adjacencyList.put(node, new ArrayList<>());
@@ -31,6 +33,10 @@ public class Graph {
         });
 
         System.out.println(connections);
+    }
+
+    public int getNumberOfNodes() {
+        return numberOfNodes;
     }
 
     public static void main(String[] args) {
