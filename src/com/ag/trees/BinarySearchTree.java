@@ -3,8 +3,7 @@ package com.ag.trees;
 
 import javafx.util.Pair;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
@@ -23,6 +22,7 @@ public class BinarySearchTree {
         tree.insert(6);
         tree.insert(20);
         tree.insert(170);
+        tree.insert(200);
         tree.insert(15);
         tree.insert(1);
 
@@ -30,10 +30,44 @@ public class BinarySearchTree {
         System.out.println(tree.lookup(56));
         System.out.println(tree.lookup(59));
         System.out.println(tree.validate());
+        System.out.println(tree.maxDepth(tree.root));
+        System.out.println(tree.maxDepthRecur(tree.root));
     }
 
     public Node<Integer> getRoot() {
         return root;
+    }
+
+    public int maxDepth(Node<Integer> root){
+        if(root == null) return 0;
+        if(isLeaf(root)) return 1;
+        int depth = 0;
+        Queue<Node<Integer>> workQueue = new LinkedList<>();
+        workQueue.offer(root);
+        while(!workQueue.isEmpty()){
+            depth++;
+            int i = 0;
+            List<Node<Integer>> nodeList = new ArrayList<>(workQueue.size());
+            while(!workQueue.isEmpty()){
+                nodeList.add(workQueue.poll());
+            }
+            nodeList.forEach(node->{
+                if(nonNull(node.left)) workQueue.offer(node.left);
+                if(nonNull(node.right)) workQueue.offer(node.right);
+
+            });
+        }
+
+        return depth;
+    }
+
+    public int maxDepthRecur(Node<Integer> root){
+        if(isNull(root)) return 0;
+        if(root.isLeaf()) return 1;
+
+        int depth = 1;
+        return  depth + Math.max(maxDepthRecur(root.left), maxDepthRecur(root.right));
+
     }
 
     public boolean insert(Integer value) {
