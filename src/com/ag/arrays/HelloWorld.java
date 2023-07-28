@@ -6,15 +6,15 @@ import static java.util.Objects.isNull;
 
 public class HelloWorld {
     public static void main(String[] args) {
-        System.out.println("Hello World");
+        int[] arr = {10,20,30,40,50};
+        fun(arr);
+        System.out.println(arr[3]);
 
-        System.out.println(Math.pow(6,1000000));
+    }
 
-        int[] array = new int[]{1,2,3,4,5,5,6,6};
-        System.out.println(array.length);
-        System.out.println(reverse(null));
-        System.out.println(reverse2("Hi, my name is Abhijit"));
-
+    static void fun(int[] arr){
+        arr[3] = 98;
+        return;
     }
 
     public static String reverse(String input){
