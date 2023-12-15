@@ -1,4 +1,4 @@
-package com.ag.lld.patterns;
+package com.ag.lld.patterns.builder;
 
 public class Student {
 
