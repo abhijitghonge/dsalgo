@@ -1,6 +1,5 @@
 package com.ag.lld.tictactoe.model.strategies;
 
-import com.ag.lld.tictactoe.model.Game;
 import com.ag.lld.tictactoe.model.Move;
 import com.ag.lld.tictactoe.model.PlayerInGame;
 import com.ag.lld.tictactoe.model.WinningStrategy;
