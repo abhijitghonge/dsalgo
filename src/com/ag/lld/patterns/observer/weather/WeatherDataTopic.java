@@ -6,9 +6,9 @@ import com.ag.lld.patterns.observer.Topic;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WeatherDataTopic implements Topic {
+public class WeatherDataTopic implements Topic<WeatherDataDetails> {
 
-    List<Subscriber> subscriptions;
+    private final List<Subscriber> subscriptions;
 
     public WeatherDataTopic(){
         subscriptions = new ArrayList<>();

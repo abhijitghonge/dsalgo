@@ -10,6 +10,17 @@ public class Bullet implements Particle {
         this.bulletBase = bulletBase;
     }
 
+    public Bullet(Bullet bullet){
+        super();
+        this.bulletBase = bullet.bulletBase;
+    }
+
+    @Override
+    public Bullet clone() throws CloneNotSupportedException {
+        super.clone();
+        return new Bullet(this);
+    }
+
 
     @Override
     public void move(int x1, int y1, int x2, int y2) {

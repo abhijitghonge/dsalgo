@@ -5,7 +5,7 @@ import com.ag.lld.patterns.observer.ui.DisplayAgent;
 import com.ag.lld.patterns.observer.ui.UIDashboard;
 import com.ag.lld.patterns.observer.ui.WeatherUIData;
 
-public class MinMaxTempSubscriber implements Subscriber {
+public class MinMaxTempSubscriber implements Subscriber<WeatherDataDetails> {
 
     private final DisplayAgent display;
 

@@ -4,7 +4,7 @@ import com.ag.lld.patterns.observer.Subscriber;
 import com.ag.lld.patterns.observer.ui.DisplayAgent;
 import com.ag.lld.patterns.observer.ui.WeatherUIData;
 
-public class WeatherDisplaySubscriber implements Subscriber {
+public class WeatherDisplaySubscriber implements Subscriber<WeatherDataDetails> {
 
     private final DisplayAgent display;
 

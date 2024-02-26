@@ -15,13 +15,13 @@ public class Main {
                 .setHumidity(87.5)
                 .setAirQuality(136).build();
 
-        Topic weatherData = new WeatherDataTopic();
+        Topic<WeatherDataDetails> weatherDataTopic = new WeatherDataTopic();
         DisplayAgent dashboard = new UIDashboard();
         DisplayAgent minMaxTemp = new MaxMinTempDisplay();
 
-        weatherData.subscribe(new WeatherDisplaySubscriber(dashboard));
-        weatherData.subscribe(new MinMaxTempSubscriber(minMaxTemp));
-        weatherData.onChange(data);
+        weatherDataTopic.subscribe(new WeatherDisplaySubscriber(dashboard));
+        weatherDataTopic.subscribe(new MinMaxTempSubscriber(minMaxTemp));
+        weatherDataTopic.onChange(data);
 
 
         WeatherDataDetails changedData = WeatherDataDetails.builder()
@@ -29,7 +29,7 @@ public class Main {
                 .setHumidity(87.5)
                 .setAirQuality(136).build();
 
-        weatherData.onChange(changedData);
+        weatherDataTopic.onChange(changedData);
 
 
     }
