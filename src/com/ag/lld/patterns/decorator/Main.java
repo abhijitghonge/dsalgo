@@ -14,9 +14,9 @@ public class Main {
         coffee.calculateCost();
 
         //Cappicuno with Mocha
-        Beverage cappicinoMocha = new Mocha(new Cappicino());
+        Beverage cappicinoWithMocha = new Mocha(new Cappicino());
 
-        cappicinoMocha.calculateCost();
+        cappicinoWithMocha.calculateCost();
 
 
     }
