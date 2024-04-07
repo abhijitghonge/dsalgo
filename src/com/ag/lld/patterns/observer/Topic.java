@@ -1,10 +1,26 @@
 package com.ag.lld.patterns.observer;
 
-import com.ag.lld.patterns.observer.weather.WeatherDataDetails;
+import java.util.ArrayList;
+import java.util.List;
 
-public interface Topic<T> {
-    boolean subscribe(Subscriber subscriber);
-    boolean unsubscribe(Subscriber subscriber);
+public abstract class Topic<T> {
 
-    void onChange(T data);
+    private final List<Subscriber<T>> subscribers;
+
+    public Topic(){
+        subscribers = new ArrayList<>();
+    }
+
+    public void onChange(T data){
+        subscribers.forEach(subscriber-> subscriber.notify(data));
+    }
+
+    public boolean subscribe(Subscriber<T> subscriber){
+        return subscribers.add(subscriber);
+    }
+    public boolean unsubscribe(Subscriber<T> subscriber){
+        return subscribers.remove(subscriber);
+    }
+
+
 }

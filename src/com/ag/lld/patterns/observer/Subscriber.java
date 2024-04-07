@@ -1,8 +1,28 @@
 package com.ag.lld.patterns.observer;
 
-import com.ag.lld.patterns.observer.weather.WeatherDataDetails;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
-public interface Subscriber<T> {
+public abstract class Subscriber<T> {
 
-    void notify(T data);
+    private final ExecutorService cachedService;
+
+
+    public Subscriber() {
+
+        cachedService = Executors.newCachedThreadPool();
+    }
+
+
+    public void notify(T data){
+        cachedService.submit(getTask(data));
+    }
+
+
+    public abstract Runnable getTask(T data);
+
+
 }
+
