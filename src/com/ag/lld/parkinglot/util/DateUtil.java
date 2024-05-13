@@ -1,7 +1,6 @@
 package com.ag.lld.parkinglot.util;
 
 import com.ag.lld.parkinglot.model.enums.QueryType;
-import javafx.util.Pair;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

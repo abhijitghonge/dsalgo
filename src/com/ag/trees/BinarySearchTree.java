@@ -1,7 +1,7 @@
 package com.ag.trees;
 
 
-import javafx.util.Pair;
+import com.ag.lld.parkinglot.util.Pair;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
