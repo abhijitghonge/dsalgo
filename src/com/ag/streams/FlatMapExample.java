@@ -3,6 +3,7 @@ package com.ag.streams;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class FlatMapExample {
     public static void main(String[] args) {
@@ -15,5 +16,6 @@ public class FlatMapExample {
                 .flatMap(Collection::stream)
                 .reduce(0, (count, s)-> count+1, Integer::sum);
         System.out.println(words);
+
     }
 }
