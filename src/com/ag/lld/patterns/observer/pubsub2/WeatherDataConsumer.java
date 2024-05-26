@@ -15,6 +15,6 @@ public class WeatherDataConsumer {
     }
 
     public void update(WeatherDataDetails data){
-        display.display(new WeatherUIData(data.getTemperature(), data.getHumidity(), data.getAirQuality()))
+        display.display(new WeatherUIData(data.getTemperature(), data.getHumidity(), data.getAirQuality()));
     }
 }
